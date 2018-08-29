@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+
+from imp import load_source
+from json import load as json_load
+from os import listdir
+from os.path import exists
+from sys import argv
+
+import common
+
+if len(argv)<2 or not exists(argv[1]):
+    raise RuntimeError('Need to specify config file!')
+config = load_source('myconfig', argv[1])
+for __, proc in config.__dict__.iteritems():
+    if isinstance(proc, common.Process):
+        break
+else:
+    raise RuntimeError('Need to specify Process object in config file!')
+jsons = [f for f in listdir('.') if f.endswith('.json')]
+options = {}
+for json in jsons:
+    with open(json) as f:
+        options.update(json_load(f))
+options['script'] = argv[1]
+options['vmem'] = '10G'
+proc.submit(**options)

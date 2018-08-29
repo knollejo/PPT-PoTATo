@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+
+from glob import iglob
+from itertools import imap, product
+from os import remove
+from os.path import exists, isdir
+from sys import argv
+
+if len(argv)>1:
+    if not exists(argv[1]):
+        raise RuntimeError('Specify a valid directory!')
+    directory = argv[1]
+    if not directory.endswith('/'):
+        directory = directory + '/'
+    levels = 2
+else:
+    directory = ''
+    levels = 3
+
+extensions = ('d', 'so', 'pcm', 'pyc')
+subdirectories = ('temp', )
+deleted = 0
+for level, ext in product(range(levels), extensions):
+    for filename in iglob(directory+'/'.join(['*']*(level+1))+'.'+ext):
+        if exists(filename):
+            remove(filename)
+            deleted += 1
+for level, subdir in product(range(levels-1), subdirectories):
+    for filename in iglob(directory+'/'.join(['*']*(level+1))+'/'+subdir+'/*.*'):
+        if exists(filename):
+            remove(filename)
+            deleted += 1
+
+print 'Deleted {0} files.'.format(deleted)

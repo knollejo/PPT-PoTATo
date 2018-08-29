@@ -1,0 +1,13 @@
+*.so
+*.pcm
+*.cxx_tmp
+*.d
+*.pyc
+.__afs*
+*.root
+*_ACLiC_linkdef.h
+*_ACLiC_map.in
+output/
+temp/
+log/
+plots/
