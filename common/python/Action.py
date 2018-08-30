@@ -27,6 +27,3 @@ class Action:
     def setMinMax(self, options, name, default=-1.0):
         setattr(self, 'min'+name, options.get('min'+name, default))
         setattr(self, 'max'+name, options.get('max'+name, default))
-
-    def startFile(self, res):
-        pass

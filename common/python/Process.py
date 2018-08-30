@@ -16,7 +16,6 @@ from ROOT import TChain, TFile
 from Analyzer import Analyzer
 from InputFiles import InputFiles
 from Mode import Mode
-from ResourcesManager import ResourcesManager
 from Sample import Sample
 
 class Process:
@@ -46,13 +45,11 @@ class Process:
         ))))
         self.analyzer.writeOutput(outputname)
         self.analyzer.initialize()
-        res = ResourcesManager()
         if part is None:
             for f,m,s,x,n in self.inputfiles.iterate(mode=mode, sample=sample):
                 inputfile = TFile.Open(f)
                 tree = inputfile.Get(self.treename)
-                res.registerFile(inputfile)
-                self.analyzer.process(tree, m, s, x, n, res=res)
+                self.analyzer.process(tree, m, s, x, n)
                 inputfile.Close()
         else:
             nentries = 0
@@ -63,9 +60,8 @@ class Process:
                 if nentries+thisentries>boundaries[0] and nentries<boundaries[1]:
                     first = max(0, boundaries[0]-nentries)
                     last = min(thisentries, boundaries[1]-nentries)
-                    res.registerFile(inputfile)
                     self.analyzer.process(
-                        tree, m, s, x, n, res=res, boundaries=(first, last)
+                        tree, m, s, x, n, boundaries=(first, last)
                     )
                 inputfile.Close()
                 nentries += thisentries

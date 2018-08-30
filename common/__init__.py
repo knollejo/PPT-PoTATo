@@ -49,6 +49,7 @@ if getattr(__builtin__, 'TTZ_Compile_Switch_'+__name__, False):
         'JetSelection.cpp',
         'LeptonSelection.cpp',
         'ZCandidateSelection.cpp',
+        'TrileptonTrigger.cpp',
     ):
         ROOT.gROOT.ProcessLine(command.format(path, filename))
 

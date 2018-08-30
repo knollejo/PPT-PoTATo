@@ -43,7 +43,3 @@ class OrCondition(Condition):
             cond1, ROOT.Condition(ROOT.Lepton)) else ROOT.Jet
         )(cond1, self.cond2.getAction())
         return Action.getAction(self)
-
-    def startFile(self, res):
-        self.cond1.startFile(res)
-        self.cond2.startFile(res)

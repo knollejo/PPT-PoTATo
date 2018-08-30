@@ -30,8 +30,7 @@ class Analyzer:
         self.analyzer.initialize()
 
     def process(
-        self, tree, mode=None, sample=None, xsec=-1, nevents=-1,
-        res=None, boundaries=None
+        self, tree, mode=None, sample=None, xsec=-1, nevents=-1, boundaries=None
     ):
         if mode is None:
             mode = Mode.None
@@ -39,9 +38,6 @@ class Analyzer:
             sample = Sample.None
         if boundaries is None:
             boundaries = (-1, -1)
-        if res is not None:
-            for action in self.actions:
-                action.startFile(res)
         self.analyzer.processTree(
             tree, mode, sample, xsec, nevents, boundaries[0], boundaries[1]
         )
