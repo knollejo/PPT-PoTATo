@@ -33,9 +33,9 @@ class LeptonSelection(Action):
 
     def getAction(self):
         if self.muons and not self.electrons:
-            onlyelec, onlymuon = True, False
-        elif self.electrons and not self.muons:
             onlyelec, onlymuon = False, True
+        elif self.electrons and not self.muons:
+            onlyelec, onlymuon = True, False
         else:
             onlyelec, onlymuon = False, False
         if type(self.minPt) in (list, tuple):

@@ -72,10 +72,19 @@ void LeptonSelection::initialize(Result* res) {
 }
 
 float LeptonSelection::execute(Event* ev) {
+    // make list of indices
+    int* indices = new int[ev->nLeptons()];
+    _nLep = 0;
+    for(int i=0; i<ev->nLeptons(); i++) {
+        if((_onlyMuons && ev->lepton(i)->isMuon()) || (_onlyElectrons && ev->lepton(i)->isElectron()) || (!_onlyMuons && !_onlyElectrons)) {
+            indices[_nLep] = i;
+            _nLep++;
+        }
+    }
+
     // require a number of leptons
-    _nLep = ev->nLeptons();
     if(_nMinLepPt>0) for(int i=0; i<std::min(_nLep, _nMinLepPt); i++)
-        if(ev->lepton(i)->Pt()<_minLepPt[i]) {
+        if(ev->lepton(indices[i])->Pt()<_minLepPt[i]) {
             _nLep = i;
             break;
         }
@@ -86,12 +95,12 @@ float LeptonSelection::execute(Event* ev) {
     // store lepton properties
     if(_storeNumber && (_storePdgId || _storePt || _storeEta || _storePhi || _storeRelIso || _storeMiniIso))
         for(int i=0; i<std::min(_nLep, 10); i++) {
-            _pdgLep[i] = ev->lepton(i)->pdgId();
-            _ptLep[i] = ev->lepton(i)->Pt();
-            _etaLep[i] = ev->lepton(i)->Eta();
-            _phiLep[i] = ev->lepton(i)->Phi();
-            _isoLep[i] = ev->lepton(i)->relIso();
-            _miniIsoLep[i] = ev->lepton(i)->miniIso();
+            _pdgLep[i] = ev->lepton(indices[i])->pdgId();
+            _ptLep[i] = ev->lepton(indices[i])->Pt();
+            _etaLep[i] = ev->lepton(indices[i])->Eta();
+            _phiLep[i] = ev->lepton(indices[i])->Phi();
+            _isoLep[i] = ev->lepton(indices[i])->relIso();
+            _miniIsoLep[i] = ev->lepton(indices[i])->miniIso();
         }
 
     return 1.0;
