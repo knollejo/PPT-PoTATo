@@ -27,6 +27,7 @@ class LeptonSelection(Action):
         self.setOption(options, 'storeKinematics', False)
         self.setOption(options, 'storeRelIso', False)
         self.setOption(options, 'storeMiniIso', False)
+        self.setOption(options, 'storeEverything', False)
         self.setMinMax(options, 'Number', -1)
         self.setOption(options, 'minPt', -1.0)
 

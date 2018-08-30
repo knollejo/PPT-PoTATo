@@ -16,6 +16,6 @@ MyAnalysis.register(
 # Process
 process = common.Process(
     MyAnalysis,
-    common.DataFiles2017.all+common.MonteCarlo2017.all,
+    common.DataFiles2017.all, #+common.MonteCarlo2017.all,
     name='MyAnalysis_v1'
 )
