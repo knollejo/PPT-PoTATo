@@ -80,7 +80,7 @@ class PlotManager(PostProcessor):
                 self.C_action.append('if({}) {{'.format(cat.Condition()))
                 self.C_action.append('catweight = selweight*({});'.format(cat.Weight()))
                 ytitle = ' '.join(
-                    filter(None, (cat.Label(), 'Events', sel.Label()))
+                    filter(None, (cat.Label(), 'Ereignisse', sel.Label()))
                 )
                 for obs in self.observables:
                     if obs.Skip(cat.short, sel.short):

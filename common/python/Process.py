@@ -98,7 +98,7 @@ class Process:
             ])
             for part, (upper, lower) in enumerate(boundaries):
                 partl = 'part{0}'.format(part)
-                command = ['qsub -j y -o']
+                command = ['condor_qsub -j y -o']
                 command.append('{0}/log/{1}.txt'.format(cwd, '_'.join(filter(
                     None,
                     (name, Mode.getName(m), Sample.getName(s), partl, timestamp)

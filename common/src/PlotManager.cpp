@@ -23,9 +23,6 @@
 /*$#{END_INCLUDES}#$*/
 
 /*$#{BEGIN_DEFINITIONS}#$*/
-    enum Status { WorkInProgress, Preliminary, Final };
-    Status _status;
-
     struct StyleContainer {
         short markercolor;
         short markerstyle;
@@ -64,7 +61,6 @@
 /*$#{END_DEFINITIONS}#$*/
 
 /*$#{BEGIN_INITIALIZATIONS}#$*/,
-    _status(Status::/*$#{STATUS}#$*/),
     _stylecontainers(new StyleContainer[/*$#{NSTREAMS}#$*/]),
     _legendentries(new LegendEntry[/*$#{NSTREAMS}#$*/]),
     _forStack(new bool[/*$#{NSTREAMS}#$*/]),
@@ -119,14 +115,20 @@
     // Create the plots
     for(int nPlot=0; nPlot<_n_plots; nPlot++) {
         PlotContainer* plot = _plots+nPlot;
-        Style style = (_plots+nPlot)->style;
+        // Style style = (_plots+nPlot)->style;
         THStack* stack = new THStack(plot->name+"_stack", "");
         std::vector<int> unstacked;
         double maxi = -1.0e99;
         for(int nStream=0; nStream<_n_streams; nStream++) {
             StreamContainer* stream = _streams+nStream;
             TH1* hist = plot->hists[nStream];
-            if(style!=nullptr) (this->*style)(hist, _stylecontainers+nStream);
+            hist->SetMarkerColor(_stylecontainers[nStream].markercolor);
+            hist->SetMarkerStyle(_stylecontainers[nStream].markerstyle);
+            hist->SetLineColor(_stylecontainers[nStream].linecolor);
+            hist->SetLineStyle(_stylecontainers[nStream].linestyle);
+            hist->SetFillColor(_stylecontainers[nStream].fillcolor);
+            hist->SetFillStyle(_stylecontainers[nStream].fillstyle);
+            //if(style!=nullptr) (this->*style)(hist, _stylecontainers+nStream);
             if(_forStack[nStream]) {
                 stack->Add(hist);
             } else {
@@ -168,22 +170,12 @@
         _text.SetTextAlign(31);
         _text.DrawLatex(0.97, 0.96, _luminosity);
         _text.SetTextAlign(11);
-        switch(_status) {
-            case Status::Preliminary:
-                _text.SetTextFont(52);
-                _text.SetTextSize(0.04);
-                _text.DrawLatex(0.18, 0.83, "Preliminary");
-            case Status::Final:
-                _text.SetTextFont(62);
-                _text.SetTextSize(0.05);
-                _text.DrawLatex(0.18, 0.88, "CMS");
-                break;
-            case Status::WorkInProgress:
-                _text.SetTextFont(52);
-                _text.SetTextSize(0.04);
-                _text.DrawLatex(0.18, 0.88, "Work in Progress");
-                break;
-        }
+        _text.SetTextFont(52);
+        _text.SetTextSize(0.04);
+        _text.DrawLatex(0.18, 0.83, "Hamburg 2018");
+        _text.SetTextFont(62);
+        _text.SetTextSize(0.05);
+        _text.DrawLatex(0.18, 0.88, "PPT");
         canv->SaveAs("plots/"+plot->name+".pdf");
         canv->SaveAs("plots/"+plot->name+".C");
         canv->Close();
