@@ -38,6 +38,7 @@ namespace Mode {
         FourTops        = 0x100000,
         TZQtoLL         = 0x200000,
         SingleTopWLL    = 0x400000,
+        TTbarSemilepton   = 0x800000,
     };
     const Type SingleLepton = SingleElectron | SingleMuon;
     const Type DoubleLepton = DoubleElectron | DoubleMuon | ElectronMuon;
@@ -45,8 +46,9 @@ namespace Mode {
     const Type SingleBoson  = DYJetsToLL | WJetsToLNu;
     const Type Diboson      = ZZto4L | WZto3L | ZGto2LG | WGtoLNuG;
     const Type Triboson     = ZZZtoAll | WZZtoAll | WWZtoAll;
+    const Type TTbar        = TTbarDilepton | TTbarSemilepton;
     const Type TTbarX       = TTbarZtoLLNuNu | TTbarWJetstoLNu | TTbarHtononBB | TTbarGJets | TTbarDilepton;
-    const Type TopMC        = TTbarX | FourTops | TZQtoLL | SingleTopWLL;
+    const Type TopMC        = TTbar | TTbarX | FourTops | TZQtoLL | SingleTopWLL;
     const Type MonteCarlo   = SingleBoson | Diboson | Triboson | TopMC;
 }
 

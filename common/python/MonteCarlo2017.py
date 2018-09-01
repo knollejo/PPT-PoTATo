@@ -13,24 +13,36 @@ from Sample import Sample
 MonteCarlo2017 = InputFileCollection()
 
 MonteCarlo2017.ttzll = InputFiles(
-    '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/ttbarZtollnunu.root',
-    mode=Mode.TTbarZtoLLNuNu, sample=Sample.MC2017, nevents=1838397.29674, xsec=272.8#252.9
+    InputFiles(
+        '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/ttbarZtollnunu_fall17.root',
+        mode=Mode.TTbarZtoLLNuNu, sample=Sample.MC2017,
+        nevents=163070.543921, xsec=272.8
+    ),
+    InputFiles(
+        '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/ttbarZtoll_fall17.root',
+        mode=Mode.TTbarZtoLLNuNu, sample=Sample.MC2017,
+        nevents=13397.3663109, xsec=49.3
+    ),
 )
 MonteCarlo2017.ttwjtoln = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/ttbarWjetstolnu_fall17.root',
-    mode=Mode.TTbarWJetstoLNu, sample=Sample.MC2017, nevents=1687666.15467, xsec=204.3
+    mode=Mode.TTbarWJetstoLNu, sample=Sample.MC2017,
+    nevents=1687666.15466, xsec=204.3
 )
 MonteCarlo2017.tthtononbb = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/ttbarH125tononbbbar_fall17.root',
-    mode=Mode.TTbarHtononBB, sample=Sample.MC2017, nevents=4484065.54236, xsec=215.1
+    mode=Mode.TTbarHtononBB, sample=Sample.MC2017,
+    nevents=4484065.54236, xsec=215.1
 )
 MonteCarlo2017.ttgjets = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/ttgjets_fall17.root',
-    mode=Mode.TTbarGJets, sample=Sample.MC2017, nevents=66911664.2488, xsec=3697.0
+    mode=Mode.TTbarGJets, sample=Sample.MC2017,
+    nevents=66911664.2488, xsec=3697.0
 )
 MonteCarlo2017.ttX = InputFiles(
-    # MonteCarlo2017.ttzll,
-    MonteCarlo2017.ttwjtoln, MonteCarlo2017.tthtononbb,
+    MonteCarlo2017.ttzll,
+    MonteCarlo2017.ttwjtoln,
+    MonteCarlo2017.tthtononbb,
     MonteCarlo2017.ttgjets
 )
 
@@ -38,12 +50,16 @@ MonteCarlo2017.ttdilep = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/ttbarsignalplustau_fromDilepton_fall17.root',
     mode=Mode.TTbarDilepton, sample=Sample.MC2017, nevents=627509941.344, xsec=87310.0
 )
+MonteCarlo2017.ttsemilep = InputFiles(
+    '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/ttbarsignalplustau_fromSemilepton_fall17.root',
+    mode=Mode.TTbarSemilepton, sample=Sample.MC2017, nevents=12399220675.5, xsec=687100.0
+)
 MonteCarlo2017.tt = InputFiles(MonteCarlo2017.ttdilep)
 
 MonteCarlo2017.dyjtoll = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/dy50inf_fall17_newpu.root',
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/dy50inf_fall17_oldpu.root',
-    mode=Mode.DYJetsToLL, sample=Sample.MC2017, nevents=89157476302.7, xsec=5765400.0
+    mode=Mode.DYJetsToLL, sample=Sample.MC2017, nevents=3.83243146e12, xsec=6025200.0
 )
 MonteCarlo2017.wjetstoln = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/wtolnu_fall17.root',
@@ -55,11 +71,11 @@ MonteCarlo2017.vjets = InputFiles(
 
 MonteCarlo2017.zzto4l = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/zzto4l_fall17.root',
-    mode=Mode.ZZto4L, sample=Sample.MC2017, nevents=2445271.52241, xsec=1256.0#1212.0
+    mode=Mode.ZZto4L, sample=Sample.MC2017, nevents=2445271.52241, xsec=1381.6
 )
 MonteCarlo2017.wzto3l = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/wzto3l_fall17.root',
-    mode=Mode.WZto3L, sample=Sample.MC2017, nevents=16442085.201733, xsec=4429.65#4429.65
+    mode=Mode.WZto3L, sample=Sample.MC2017, nevents=16442085.2017, xsec=4429.65
 )
 MonteCarlo2017.vv = InputFiles(
     MonteCarlo2017.zzto4l, MonteCarlo2017.wzto3l,
@@ -88,7 +104,7 @@ MonteCarlo2017.tttt = InputFiles(
 
 MonteCarlo2017.tzqtoll = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/tzq_fall17.root',
-    mode=Mode.TZQtoLL, sample=Sample.MC2017, nevents=162630.109078, xsec=94.18#75.8
+    mode=Mode.TZQtoLL, sample=Sample.MC2017, nevents=162630.109078, xsec=94.18
 )
 MonteCarlo2017.tX = InputFiles(
     MonteCarlo2017.tzqtoll,
