@@ -54,7 +54,7 @@ MonteCarlo2017.ttsemilep = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/ttbarsignalplustau_fromSemilepton_fall17.root',
     mode=Mode.TTbarSemilepton, sample=Sample.MC2017, nevents=12399220675.5, xsec=687100.0
 )
-MonteCarlo2017.tt = InputFiles(MonteCarlo2017.ttdilep)
+MonteCarlo2017.tt = InputFiles(MonteCarlo2017.ttdilep, MonteCarlo2017.ttsemilep)
 
 MonteCarlo2017.dyjtoll = InputFiles(
     '/nfs/dust/cms/user/knollejo/cms/94X/ppt_v1/dy50inf_fall17_newpu.root',
